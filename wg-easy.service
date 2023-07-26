@@ -1,0 +1,36 @@
+[Unit]
+Description=WG-Easy Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/node /app/server.js
+WorkingDirectory=/app
+Restart=always
+User=root
+Group=nogroup
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=NODE_ENV=production
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=nodejs-server
+
+Environment="PASSWORD="
+Environment="PORT=80"
+Environment="WG_HOST=%%EXTERNALIP%%"
+Environment="WG_DEVICE=eth0"
+Environment="WG_PORT=51820"
+Environment="WG_MTU=1420"
+Environment="WG_PERSISTENT_KEEPALIVE=25"
+Environment="WG_DEFAULT_ADDRESS=192.168.12.x"
+Environment="WG_DEFAULT_DNS=192.168.10.100"
+Environment="WG_ALLOWED_IPS=0.0.0.0/0"
+Environment="WG_PRE_UP="
+Environment="WG_POST_UP=iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE                                                                                                                                         eth0 -j MASQUERADE""
+Environment="WG_PRE_DOWN="
+Environment="WG_POST_DOWN=iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o eth0 -j MASQUERADE"
+
+[Install]
+WantedBy=multi-user.target
+
+
+
