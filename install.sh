@@ -35,7 +35,7 @@ apt-get update >/dev/null 2>&1
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin >/dev/null 2>&1
 
 #Start Docker Container
-echo Perform first start of Services...
+echo Perform first start of Services..
 docker network create --subnet 192.168.10.0/24 Global >/dev/null 2>&1
 docker run --detach --restart always --name Service.Watchtower --volume /var/run/docker.sock:/var/run/docker.sock -e WATCHTOWER_CLEANUP=true containrrr/watchtower >/dev/null 2>&1
 docker run --detach --restart always --network=Global --ip 192.168.10.20 --name Service.MySQL -e "MYSQL_ROOT_PASSWORD=$RPW" -v /home/Volumes/System/MariaDB:/var/lib/mysql mariadb:10.4.3 >/dev/null 2>&1
@@ -47,8 +47,7 @@ docker run --detach --restart always --network=Global --ip 192.168.10.101 --name
 
 #Set Default Settings
 echo Copy default Settings
-wget -O /home/Volumes/System/PiHole/data/custom.list https://raw.githubusercontent.com/SelfHostVPN/SelfHostVPN/main/custom.list && docker restart Applications.PiHole >/dev/null 2>&1
-wget -O /home/Volumes/System/Dashy/dashy-config.yml https://raw.githubusercontent.com/SelfHostVPN/SelfHostVPN/main/dashy-config.yml && docker restart Applications.Dashy >/dev/null 2>&1
+wget -q -O /home/Volumes/System/PiHole/data/custom.list https://raw.githubusercontent.com/SelfHostVPN/SelfHostVPN/main/custom.list && docker restart Applications.PiHole >/dev/null 2>&1
+wget -q -O /home/Volumes/System/Dashy/dashy-config.yml https://raw.githubusercontent.com/SelfHostVPN/SelfHostVPN/main/dashy-config.yml && docker restart Applications.Dashy >/dev/null 2>&1
 
 curl -X POST http://192.168.10.99:51821/api/wireguard/client -H "Content-Type: application/json" -d '{"name":"First VPN Client"}' >/dev/null 2>&1
-
