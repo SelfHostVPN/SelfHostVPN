@@ -1,0 +1,37 @@
+appConfig:
+  theme: nord-frost
+  customColors:
+    material-dark-original:
+      primary: '#f36558'
+      background: '#39434C'
+      background-darker: '#eb615c'
+      material-light: '#f36558'
+      item-text-color: '#ff948a'
+      curve-factor: 5px
+  enableErrorReporting: true
+  layout: auto
+  iconSize: medium
+  language: de
+pageInfo:
+  title: SelfHost Links
+  description: A list of all Services
+  navLinks:
+    - title: SelfHost VPN
+      path: https://github.com/SelfHostVPN/SelfHostVPN/
+  footerText: ''
+sections:
+  - name: Network Services
+    icon: fas fa-photo-video
+    displayData:
+      sortBy: default
+      cols: 1
+      itemCountX: 2
+    items:
+      - title: WG-Easy
+        icon: hl-alltube
+        url: http://wg.hole
+        id: 0_0000_wgeasy
+      - title: Pi-Hole
+        icon: hl-youtubedl
+        url: http://pi.hole
+        id: 1_0001_pihole
