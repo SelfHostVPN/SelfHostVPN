@@ -7,6 +7,7 @@ apt-get install -qy ca-certificates curl gnupg git wget jq  >/dev/null 2>&1
 
 #Fetch external IP
 echo Getting External IP, generate Random Data
+echo
 externalIP=$(curl -s https://4.myip.is/ | jq -r '.ip') >/dev/null 2>&1
 echo External IP: $externalIP
 echo $externalIP > /home/ip.txt
@@ -17,10 +18,10 @@ echo Random Port: $WGPort
 echo $WGPort > /home/port.txt
 
 #Generate Random Passwort
-RPW=$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 32 ; echo)
+RPW=$(LC_ALL=C tr -dc 'A-Za-z0-9!$%&/(),.#+-' </dev/urandom | head -c 32 ; echo)
 echo Random Password: $RPW
 echo $RPW > /home/password.txt
-echo.
+echo
 
 #Install Docker
 echo Install Docker
