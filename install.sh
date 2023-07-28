@@ -2,8 +2,8 @@
 
 ##System update and install base software
 echo Update System, Installing curl, wget, jq, gnupg ...
-apt-get update -q && apt-get -q -y upgrade >/dev/null 2>&1
-apt-get install -q -y ca-certificates curl gnupg git wget jq  >/dev/null 2>&1
+DEBIAN_FRONTEND=noninteractive -q && apt-get -qy upgrade >/dev/null 2>&1
+apt-get install -qy ca-certificates curl gnupg git wget jq  >/dev/null 2>&1
 
 #Fetch external IP
 echo Getting External IP, generate Random Data
