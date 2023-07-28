@@ -2,8 +2,8 @@
 
 ##System update and install base software
 echo Update System, Installing curl, wget, jq, gnupg ...
-apt-get update && apt-get -y upgrade >/dev/null 2>&1
-apt-get install -y ca-certificates curl gnupg git wget jq  >/dev/null 2>&1
+apt-get update -q && apt-get -q -y upgrade >/dev/null 2>&1
+apt-get install -q -y ca-certificates curl gnupg git wget jq  >/dev/null 2>&1
 
 #Fetch external IP
 echo Getting External IP, generate Random Data
@@ -20,6 +20,7 @@ echo $WGPort > /home/port.txt
 RPW=$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 32 ; echo)
 echo Random Password: $RPW
 echo $RPW > /home/password.txt
+echo.
 
 #Install Docker
 echo Install Docker
