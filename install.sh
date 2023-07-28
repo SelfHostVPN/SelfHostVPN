@@ -7,7 +7,7 @@ apt-get install -q -y ca-certificates curl gnupg git wget jq  >/dev/null 2>&1
 
 #Fetch external IP
 echo Getting External IP, generate Random Data
-externalIP=$(curl https://4.myip.is/ | jq -r '.ip') >/dev/null 2>&1
+externalIP=$(curl -s https://4.myip.is/ | jq -r '.ip') >/dev/null 2>&1
 echo External IP: $externalIP
 echo $externalIP > /home/ip.txt
 
@@ -50,4 +50,4 @@ echo Copy default Settings
 wget -q -O /home/Volumes/System/PiHole/data/custom.list https://raw.githubusercontent.com/SelfHostVPN/SelfHostVPN/main/custom.list && docker restart Applications.PiHole >/dev/null 2>&1
 wget -q -O /home/Volumes/System/Dashy/dashy-config.yml https://raw.githubusercontent.com/SelfHostVPN/SelfHostVPN/main/dashy-config.yml && docker restart Applications.Dashy >/dev/null 2>&1
 
-curl -X POST http://192.168.10.99:51821/api/wireguard/client -H "Content-Type: application/json" -d '{"name":"First VPN Client"}' >/dev/null 2>&1
+curl -s -X POST http://192.168.10.99:51821/api/wireguard/client -H "Content-Type: application/json" -d '{"name":"First VPN Client"}' >/dev/null 2>&1
