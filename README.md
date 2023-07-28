@@ -10,7 +10,7 @@ You can easily install the entire system with one command.
 This script was made for a new Debian 11 server.
 Docker, WG-Easy and Pi-Hole will be installed.
 
-`curl https://raw.githubusercontent.com/SelfHostVPN/SelfHostVPN/main/install.sh | bash`
+`curl -s https://raw.githubusercontent.com/SelfHostVPN/SelfHostVPN/main/install.sh | bash`
 
 ### First Steps after the installation
 
