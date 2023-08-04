@@ -44,7 +44,7 @@ docker run --detach --restart always --network=Global --ip 192.168.10.50 --name 
 docker run --detach --restart always --network=Global --ip 192.168.10.99 --name Applications.WGEasy -e VIRTUAL_PORT=51821 -e VIRTUAL_HOST=wg.hole --user root -e WG_HOST=$externalIP -e WG_PORT=$WGPort -e "PASSWORD=$RPW" -e WG_ALLOWED_IPS=0.0.0.0/0 -e WG_DEFAULT_DNS=192.168.10.100  -e WG_DEFAULT_ADDRESS=192.168.12.x -p $WGPort:51820/udp --privileged --cap-add=CAP_NET_RAW --cap-add=CAP_NET_BIND_SERVICE --cap-add=NET_ADMIN -v /home/Volumes/System/WGEasy:/etc/wireguard weejewel/wg-easy >/dev/null 2>&1
 docker run --detach --restart always --network=Global --ip 192.168.10.100 --name Applications.PiHole -e VIRTUAL_PORT=80 -e VIRTUAL_HOST=pi.hole --cap-add=NET_ADMIN -e TZ=Europe/Berlin -e "WEBPASSWORD=$RPW" -e ServerIP=192.168.10.100 -v /home/Volumes/System/PiHole/data:/etc/pihole/ -v /home/Volumes/System/PiHole/dnsmasq:/etc/dnsmasq.d/ -e INTERFACE=eth0 -e DNSMASQ_LISTENING=all --privileged --cap-add=CAP_NET_RAW --cap-add=CAP_NET_BIND_SERVICE --cap-add=NET_ADMIN pihole/pihole >/dev/null 2>&1
 docker run --detach --restart always --network=Global --ip 192.168.10.101 --name Applications.Dashy -e VIRTUAL_PORT=80 -e VIRTUAL_HOST=start.hole -v /home/Volumes/System/Dashy/dashy-config.yml:/app/public/conf.yml:ro lissy93/dashy:latest >/dev/null 2>&1
-
+docker run --detach --restart always --network=Global --ip 192.168.10.102 --name Applications.Yacy -e VIRTUAL_PORT=8090 -e VIRTUAL_HOST=start.hole -v /home/Volumes/System/Yacy:/opt/yacy_search_server/DATA --log-opt max-size=200m --log-opt max-file=2 yacy/yacy_search_server:latest
 
 #Set Default Settings
 echo Copy default Settings
