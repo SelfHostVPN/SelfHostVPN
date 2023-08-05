@@ -6,10 +6,10 @@ apt-get update > /dev/null 2>&1 && apt-get upgrade -y > /dev/null 2>&1
 DEBIAN_FRONTEND=noninteractive apt-get update -q > /dev/null 2>&1 && apt-get -qy upgrade >/dev/null 2>&1
 apt-get install -qy ca-certificates curl gnupg git wget jq  >/dev/null 2>&1
 
-externalIP=$(cat /home/ip.txt) >/dev/null 2>&1
-WGPort=$(cat /home/port.txt)
-RPW=$(cat /home/password.txt)
-SSHPort=$(cat /home/sshport.txt)
+externalIP=$(cat /var/shvpn/ip.txt) >/dev/null 2>&1
+WGPort=$(cat /var/shvpn/port.txt)
+RPW=$(cat /var/shvpn/password.txt)
+SSHPort=$(cat /var/shvpn/sshport.txt)
 
 
 #Stop Docker Container

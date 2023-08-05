@@ -6,28 +6,33 @@ apt-get update > /dev/null 2>&1 && apt-get upgrade -y > /dev/null 2>&1
 DEBIAN_FRONTEND=noninteractive apt-get update -q  > /dev/null 2>&1 && apt-get -qy upgrade >/dev/null 2>&1
 apt-get install -qy ca-certificates curl gnupg git wget jq  >/dev/null 2>&1
 
+mkdir /var/shvpn
+
 #Fetch external IP
 echo Getting External IP, generate Random Data
 echo
 externalIP=$(curl -s https://4.myip.is/ | jq -r '.ip') >/dev/null 2>&1
 echo External IP: $externalIP
-echo $externalIP > /home/ip.txt
+echo $externalIP > /var/shvpn/ip.txt
 
 #Get Random Port for WireGard
 WGPort=$((RANDOM % 15000 + 40000))
 echo Random Port: $WGPort
-echo $WGPort > /home/port.txt
+echo $WGPort > /var/shvpn/port.txt
 
 #Get Random Port for SSH
 SSHPort=$((RANDOM % 15000 + 40000))
 echo Random SSH Port: $SSHPort
-echo $SSHPort > /home/sshport.txt
+echo $SSHPort > /var/shvpn/sshport.txt
 
 #Generate Random Passwort
 RPW=$(LC_ALL=C tr -dc 'A-Za-z0-9!$%&/(),.#+-' </dev/urandom | head -c 32 ; echo)
 echo Random Password: $RPW
-echo $RPW > /home/password.txt
+echo $RPW > /var/shvpn/password.txt
 echo
+
+#Chane SSH Port
+sed -i "s/^#*Port .*/Port $SSHPort/" /etc/ssh/sshd_config
 
 #Install Docker
 echo Install Docker
@@ -58,3 +63,5 @@ echo Copy default Settings
 wget -q -O /home/Volumes/System/PiHole/data/custom.list https://raw.githubusercontent.com/SelfHostVPN/SelfHostVPN/main/DefaultData/PiHole/custom.list && docker restart Applications.PiHole >/dev/null 2>&1
 
 #curl -s -X POST http://192.168.10.99:51821/api/wireguard/client -H "Content-Type: application/json" -d '{"name":"First VPN Client"}' >/dev/null 2>&1
+
+touch /var/shvpn/intalled

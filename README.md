@@ -12,6 +12,10 @@ Docker, WG-Easy and Pi-Hole will be installed.
 
 `curl -s https://raw.githubusercontent.com/SelfHostVPN/SelfHostVPN/main/install.sh | bash`
 
+To Update run this:
+
+`curl -s https://raw.githubusercontent.com/SelfHostVPN/SelfHostVPN/main/update.sh | bash`
+
 ### First Steps after the installation
 
 After installing, you will have no access to any Services yet. All interfaces are only accessible via the VPN. It is also possible to access the services via SSH tunnel.
