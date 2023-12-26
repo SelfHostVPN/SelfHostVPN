@@ -11,6 +11,12 @@ WGPort=$(cat /var/shvpn/port.txt)
 RPW=$(cat /var/shvpn/password.txt)
 SSHPort=$(cat /var/shvpn/sshport.txt)
 
+#Download new Version of Docker Images
+docker pull jwilder/nginx-proxy:alpine
+docker pull weejewel/wg-easy
+docker pull pihole/pihole
+docker pull yacy/yacy_search_server:latest
+docker pull ghcr.io/alexta69/metube
 
 #Stop Docker Container
 echo Stop docker container..
